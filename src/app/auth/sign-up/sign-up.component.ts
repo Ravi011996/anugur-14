@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CreateUserGQL } from 'src/generated-types';
 
 @Component({
   selector: 'app-sign-up',
@@ -6,12 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  constructor(){}
+  constructor(private readonly createUserGQL : CreateUserGQL){}
 
   ngOnInit(): void {}
 
   signUp({email,password}:any) {
-    console.log(email);
-    console.log(password);
+    this.createUserGQL.mutate({createUserData:{email,password}}).subscribe(() =>{
+
+    })
   }
 }

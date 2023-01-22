@@ -5,10 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderModule } from './header/header.module';
-import { APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { SignUpModule } from './auth/sign-up/sign-up.module';
+import { LoginModule } from './auth/login/login.module';
 
 
 @NgModule({
@@ -21,21 +23,24 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule,
     HeaderModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
+    ApolloModule, 
+    LoginModule,
+    SignUpModule,
   ],
   providers: [
     {
       provide: APOLLO_OPTIONS,
-      useFactory: (httpLink:HttpLink) => {
+      useFactory: (httpLink: HttpLink) => {
         return {
-          caches: new InMemoryCache(),
+          cache: new InMemoryCache(),
           link: httpLink.create({
-            uri: 'api/graphql'
-          })
+            uri: 'http://localhost:3000/graphql',
+          }),
         };
       },
-      deps: [HttpLink]
-    }, 
+      deps: [HttpLink],
+    },
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 
 
 const appRoutes: Routes = [
@@ -7,9 +8,13 @@ const appRoutes: Routes = [
     path: 'login',
     loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule),
   },
+  // {
+  //   path: 'signup',
+  //   loadChildren: () => import('./auth/sign-up/sign-up.module').then(m => m.SignUpModule),
+  // },
   {
     path: 'signup',
-    loadChildren: () => import('./auth/sign-up/sign-up.module').then(m => m.SignUpModule),
+    component: SignUpComponent,
   },
   {
     path: '**',
